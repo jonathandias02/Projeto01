@@ -110,14 +110,8 @@ public class Projeto1 {
                         break;
                     case 4:
                         //Faixa Etaria - > Declarando variaveis
-                        int qtd,
-                         idade,
-                         somai = 0,
-                         somam = 0,
-                         somaf = 0,
-                         contm = 0,
-                         contf = 0,
-                         i;
+                        int qtd, idade, somai = 0, somam = 0, somaf = 0,
+                                contm = 0, contf = 0, i;
                         char sexo;
                         //Recebendo Quantidade de Pessoas
                         do {
@@ -126,10 +120,14 @@ public class Projeto1 {
                                     + "\n\nEntre com a quantidade de pessoas!"));
                             //For para receber todas as idades e sexos
                             for (i = 0; i < qtd; i++) {
-                                idade = Integer.parseInt(JOptionPane.showInputDialog("Idade da " + (i + 1) + "º Pessoa:"));
+                                idade = Integer.parseInt(JOptionPane.showInputDialog("----"
+                                        + "--------------FAIXA-ETÁRIA-------------------"
+                                        + "\nIdade da " + (i + 1) + "º Pessoa:"));
                                 //Verifica se é um sexo valido
                                 do {
-                                    sexo = JOptionPane.showInputDialog("Digite o sexo da " + (i + 1) + "º Pessoa:").charAt(0);
+                                    sexo = JOptionPane.showInputDialog("----"
+                                            + "--------------FAIXA-ETÁRIA-------------------"
+                                            + "\nDigite o sexo da " + (i + 1) + "º Pessoa:").charAt(0);
                                     if (sexo != 'm' && sexo != 'M' && sexo != 'f' && sexo != 'F') {
                                         JOptionPane.showMessageDialog(null, "Sexo Invalido!");
                                     }
@@ -147,7 +145,9 @@ public class Projeto1 {
                             }
                             //imprime resultados caso pessoas do sexo masculino for 0
                             if (contm == 0) {
-                                JOptionPane.showMessageDialog(null, "Media de idade das pessoas: "
+                                JOptionPane.showMessageDialog(null, "----"
+                                        + "--------------FAIXA-ETÁRIA-------------------"
+                                        + "\nMedia de idade das pessoas: "
                                         + (somai / i) + "\nMedia de idade do sexo M: ---"
                                         + "\nMedia de idade do sexo F: "
                                         + (somaf / contf));
@@ -158,7 +158,9 @@ public class Projeto1 {
                                         + (somam / contm) + "\nMedia de idade do sexo F: ---");
                                 //imprime resultado caso haja pessoas de ambos os sexos
                             } else {
-                                JOptionPane.showMessageDialog(null, "Media de idade das pessoas: "
+                                JOptionPane.showMessageDialog(null, "----"
+                                        + "--------------FAIXA-ETÁRIA-------------------"
+                                        + "\nMedia de idade das pessoas: "
                                         + (somai / i) + "\nMedia de idade do sexo M: "
                                         + (somam / contm) + "\nMedia de idade do sexo F: "
                                         + (somaf / contf));
@@ -174,6 +176,97 @@ public class Projeto1 {
                             } while (op != 1 && op != 0);
                         } while (op != 0);
                         break;
+                    case 5:
+                        do {
+                            //Declarando variaveis
+                            int somaprimos = 0;
+                            boolean primo = false;
+                            //Recebendo numero
+                            n1 = Integer.parseInt(JOptionPane.showInputDialog("--------"
+                                    + "---------SOMA-NUMEROS-PRIMOS-------------------"
+                                    + "\nEntre com um número:"));
+                            /*Laço de repetição para determinar numeros primos
+                            até o numero digitado*/
+                            for (i = 2; i <= n1; i++) {
+                                //se for numeros primos é somado a somaprimos
+                                if (i == 2) {
+                                    somaprimos += i;
+                                }
+                                for (int j = 2; j < i; j++) {
+                                    if (i % j == 0) {
+                                        primo = false;
+                                        break;
+                                    } else {
+                                        primo = true;
+                                    }
+                                }
+                                if (primo == true) {
+                                    somaprimos += i;
+                                }
+                            }
+                            //apresenta o resultado da soma entre numeros primos
+                            JOptionPane.showMessageDialog(null, "--------"
+                                    + "---------SOMA-NUMEROS-PRIMOS-------------------"
+                                    + "\nResultado: " + somaprimos);
+                            //menu para uma nova soma ou voltar ao menu principal
+                            do {
+                                op = Integer.parseInt(JOptionPane.showInputDialog("--------"
+                                        + "--------SOMA-NUMEROS-PRIMOS---------------\n"
+                                        + "1 - Nova soma\n0 - Voltar"));
+                                if (op != 1 && op != 0) {
+                                    JOptionPane.showMessageDialog(null, "Opção Invalida!");
+                                }
+                            } while (op != 1 && op != 0);
+                        } while (op != 0);
+                        break;
+                    case 6:
+                        do {
+                            //Declarando variaveis e recebendo valores
+                            char base;
+                            String n = JOptionPane.showInputDialog("Entre com um numero: ");
+                            //loop que garante entradas de base d ou b
+                            do {
+                                base = JOptionPane.showInputDialog("Qual base do numero?\n"
+                                        + "d - Decimal\nb - Binario").charAt(0);
+                                if (base != 'd' && base != 'D' && base != 'b' && base != 'B') {
+                                    JOptionPane.showMessageDialog(null, "Base Invalida!");
+                                }
+                            } while (base != 'd' && base != 'D' && base != 'b' && base != 'B');
+                            if (base == 'd') {
+                                //Convertendo Decimal em Binario
+                                n1 = Integer.parseInt(n);
+                                n2 = n1;
+                                String bi;
+                                bi = String.valueOf(n1 % 2);
+                                n1 = n1 / 2;
+                                while (n1 >= 1) {
+                                    bi = String.valueOf(n1 % 2) + bi;
+                                    n1 = n1 / 2;
+                                }
+                                //Mostrando Resultado
+                                JOptionPane.showMessageDialog(null, "--------"
+                                        + "------MUDANÇA-DE-BASE-------------\n"
+                                        + "Resultado: " + n2 + " em binario é " + bi);
+                            } else {
+                                //Convertendo numeros binarios em decimal
+                                n1 = Integer.parseInt(n, 2);
+                                String de = Integer.toBinaryString(n1);
+                                //Mostrando Resultado
+                                JOptionPane.showMessageDialog(null, "--------"
+                                        + "------MUDANÇA-DE-BASE-------------\n"
+                                        + "Resultado: " + de + " em decimal é " + n1);
+                            }
+                            //opções para uma nova operação ou voltar ao menu principal
+                            do {
+                                op = Integer.parseInt(JOptionPane.showInputDialog("--------"
+                                        + "------MUDANÇA-DE-BASE-------------\n"
+                                        + "1 - Nova operação\n0 - Voltar"));
+                                if (op != 1 && op != 0) {
+                                    JOptionPane.showMessageDialog(null, "Opção Invalida!");
+                                }
+                            } while (op != 1 && op != 0);
+                        } while (op != 0);
+                        break;
                     //Saindo do Programa
                     case 7:
                         JOptionPane.showMessageDialog(null, "Você Saiu!");
@@ -182,7 +275,9 @@ public class Projeto1 {
                     default:
                         JOptionPane.showMessageDialog(null, "Opção Invalida!");
                 }
+
             } while (opcao != 7);
+            //tratando as exceções de entradas invalidas
         } catch (NumberFormatException e) {
             String ex = String.valueOf(e);
             if (ex.equals("java.lang.NumberFormatException: null")) {
