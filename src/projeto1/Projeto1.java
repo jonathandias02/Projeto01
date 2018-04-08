@@ -95,7 +95,7 @@ public class Projeto1 {
                                 div = n1 / n2;
                                 JOptionPane.showMessageDialog(null, "--------"
                                         + "--------------DIVISÂO------------"
-                                        + "----------\nResultado: " + div);
+                                        + "----------\nResultado: " + div + "\nResto: " + (n1%n2));
                             }
                             //Apresentando opção de nova divisão
                             do {
@@ -109,12 +109,12 @@ public class Projeto1 {
                         } while (op != 0);
                         break;
                     case 4:
+                        do {
                         //Faixa Etaria - > Declarando variaveis
                         int qtd, idade, somai = 0, somam = 0, somaf = 0,
                                 contm = 0, contf = 0, i;
                         char sexo;
-                        //Recebendo Quantidade de Pessoas
-                        do {
+                        //Recebendo Quantidade de Pessoas                        
                             qtd = Integer.parseInt(JOptionPane.showInputDialog("----"
                                     + "--------------FAIXA-ETÁRIA-------------------"
                                     + "\n\nEntre com a quantidade de pessoas!"));
@@ -187,7 +187,7 @@ public class Projeto1 {
                                     + "\nEntre com um número:"));
                             /*Laço de repetição para determinar numeros primos
                             até o numero digitado*/
-                            for (i = 2; i <= n1; i++) {
+                            for (int i = 2; i <= n1; i++) {
                                 //se for numeros primos é somado a somaprimos
                                 if (i == 2) {
                                     somaprimos += i;
@@ -223,11 +223,24 @@ public class Projeto1 {
                         do {
                             //Declarando variaveis e recebendo valores
                             char base;
-                            String n = JOptionPane.showInputDialog("Entre com um numero: ");
+                            String n = JOptionPane.showInputDialog("--------"
+                                        + "------MUDANÇA-DE-BASE-------------\n"
+                                        + "Entre com um numero: ");
+                            //caso a entrada seja nula ou cancelada programa finaliza
+                            if(n == null){
+                                JOptionPane.showMessageDialog(null, "Você Saiu!");
+                                System.exit(0);
+                            }else if ("".equals(n)){
+                                JOptionPane.showMessageDialog(null, "Entrada "
+                                        + "Incompativel!\nVocê Saiu!");
+                                System.exit(0);
+                            }
                             //loop que garante entradas de base d ou b
                             do {
-                                base = JOptionPane.showInputDialog("Qual base do numero?\n"
-                                        + "d - Decimal\nb - Binario").charAt(0);
+                                base = JOptionPane.showInputDialog("--------"
+                                        + "------MUDANÇA-DE-BASE-------------\n"
+                                        + "Qual base do numero?\n"
+                                        + "d - Decimal\nb - Binario").charAt(0);                                
                                 if (base != 'd' && base != 'D' && base != 'b' && base != 'B') {
                                     JOptionPane.showMessageDialog(null, "Base Invalida!");
                                 }
@@ -284,8 +297,15 @@ public class Projeto1 {
                 JOptionPane.showMessageDialog(null, "Você Saiu!");
             } else {
                 JOptionPane.showMessageDialog(null, "Entrada Incompativel! "
-                        + "Fim do Programa!");
+                        + "\nVocê Saiu!");
             }
+        }
+        catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Você saiu!");
+        }
+        catch(StringIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null, "Entrada Incompativel! "
+                    + "\nVocê Saiu!");
         }
     }
 
