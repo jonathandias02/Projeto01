@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projeto1;
+package projetoEtapa1;
 
 import javax.swing.JOptionPane;
 
@@ -95,7 +95,7 @@ public class Projeto1 {
                                 div = n1 / n2;
                                 JOptionPane.showMessageDialog(null, "--------"
                                         + "--------------DIVISÂO------------"
-                                        + "----------\nResultado: " + div + "\nResto: " + (n1%n2));
+                                        + "----------\nResultado: " + div + "\nResto: " + (n1 % n2));
                             }
                             //Apresentando opção de nova divisão
                             do {
@@ -110,23 +110,31 @@ public class Projeto1 {
                         break;
                     case 4:
                         do {
-                        //Faixa Etaria - > Declarando variaveis
-                        int qtd, idade, somai = 0, somam = 0, somaf = 0,
-                                contm = 0, contf = 0, i;
-                        char sexo;
-                        //Recebendo Quantidade de Pessoas                        
+                            //Faixa Etaria - > Declarando variaveis
+                            int qtd, idade, somai = 0, somam = 0, somaf = 0,
+                                    contm = 0, contf = 0, i;
+                            char sexo;
+                            //Recebendo Quantidade de Pessoas                        
                             qtd = Integer.parseInt(JOptionPane.showInputDialog("----"
                                     + "--------------FAIXA-ETÁRIA-------------------"
                                     + "\n\nEntre com a quantidade de pessoas!"));
                             //For para receber todas as idades e sexos
                             for (i = 0; i < qtd; i++) {
-                                idade = Integer.parseInt(JOptionPane.showInputDialog("----"
-                                        + "--------------FAIXA-ETÁRIA-------------------"
-                                        + "\nIdade da " + (i + 1) + "º Pessoa:"));
+                                do {
+                                    //garante que a idade não seja um valor negativo
+                                    idade = Integer.parseInt(JOptionPane.showInputDialog("----"
+                                            + "--------------FAIXA-ETÁRIA-------------------"
+                                            + "\nIdade da " + (i + 1) + "º Pessoa:"));
+                                    if (idade < 0) {
+                                        JOptionPane.showMessageDialog(null, "Não existe pessoas"
+                                                + " com idade negativa!");
+                                    }
+                                } while (idade < 0);
                                 //Verifica se é um sexo valido
                                 do {
                                     sexo = JOptionPane.showInputDialog("----"
                                             + "--------------FAIXA-ETÁRIA-------------------"
+                                            + "\nm - Masculino\nf - Feminino\n"
                                             + "\nDigite o sexo da " + (i + 1) + "º Pessoa:").charAt(0);
                                     if (sexo != 'm' && sexo != 'M' && sexo != 'f' && sexo != 'F') {
                                         JOptionPane.showMessageDialog(null, "Sexo Invalido!");
@@ -223,52 +231,72 @@ public class Projeto1 {
                         do {
                             //Declarando variaveis e recebendo valores
                             char base;
-                            String n = JOptionPane.showInputDialog("--------"
-                                        + "------MUDANÇA-DE-BASE-------------\n"
-                                        + "Entre com um numero: ");
-                            //caso a entrada seja nula ou cancelada programa finaliza
-                            if(n == null){
-                                JOptionPane.showMessageDialog(null, "Você Saiu!");
-                                System.exit(0);
-                            }else if ("".equals(n)){
-                                JOptionPane.showMessageDialog(null, "Entrada "
-                                        + "Incompativel!\nVocê Saiu!");
-                                System.exit(0);
-                            }
-                            //loop que garante entradas de base d ou b
-                            do {
-                                base = JOptionPane.showInputDialog("--------"
-                                        + "------MUDANÇA-DE-BASE-------------\n"
-                                        + "Qual base do numero?\n"
-                                        + "d - Decimal\nb - Binario").charAt(0);                                
-                                if (base != 'd' && base != 'D' && base != 'b' && base != 'B') {
-                                    JOptionPane.showMessageDialog(null, "Base Invalida!");
+                            int qtd;
+                            //recebendo qtd de numeros a mudar de base
+                            qtd = Integer.parseInt(JOptionPane.showInputDialog("--------"
+                                    + "------MUDANÇA-DE-BASE-------------\n"
+                                    + "Entre com a quantidade de numeros: "));
+                            //novas variaveis
+                            String n[] = new String[qtd];
+                            String resultados[] = new String[qtd];
+                            //loop para receber e converter numeros de acordo com sua base
+                            for (int i = 0; i < qtd; i++) {
+                                do {
+                                    //garante que o numero seja maior que 0
+                                    n[i] = JOptionPane.showInputDialog("--------"
+                                            + "------MUDANÇA-DE-BASE-------------\n"
+                                            + "Entre com um numero " + (i + 1) + ": ");
+                                    if (Integer.parseInt(n[i]) <= 0) {
+                                        JOptionPane.showMessageDialog(null, "Numero precisa ser maior que 0");
+                                    }
+                                } while (Integer.parseInt(n[i]) <= 0);
+                                //caso a entrada seja nula ou cancelada programa finaliza
+                                if (n[i] == null) {
+                                    JOptionPane.showMessageDialog(null, "Você Saiu!");
+                                    System.exit(0);
+                                } else if ("".equals(n[i])) {
+                                    JOptionPane.showMessageDialog(null, "Entrada "
+                                            + "Incompativel!\nVocê Saiu!");
+                                    System.exit(0);
                                 }
-                            } while (base != 'd' && base != 'D' && base != 'b' && base != 'B');
-                            if (base == 'd') {
-                                //Convertendo Decimal em Binario
-                                n1 = Integer.parseInt(n);
-                                n2 = n1;
-                                String bi;
-                                bi = String.valueOf(n1 % 2);
-                                n1 = n1 / 2;
-                                while (n1 >= 1) {
-                                    bi = String.valueOf(n1 % 2) + bi;
+                                n1 = Integer.parseInt(n[i]);
+                                //loop que garante entradas de base d ou b
+                                do {
+                                    base = JOptionPane.showInputDialog("--------"
+                                            + "------MUDANÇA-DE-BASE-------------\n"
+                                            + "Qual base do numero " + (i + 1) + "?\n"
+                                            + "d - Decimal\nb - Binario").charAt(0);
+                                    if (base != 'd' && base != 'D' && base != 'b' && base != 'B') {
+                                        JOptionPane.showMessageDialog(null, "Base Invalida!");
+                                    }
+                                } while (base != 'd' && base != 'D' && base != 'b' && base != 'B');
+                                if (base == 'd') {
+                                    //Convertendo Decimal em Binario                                
+                                    String bi;
+                                    bi = String.valueOf(n1 % 2);
                                     n1 = n1 / 2;
+                                    while (n1 >= 1) {
+                                        bi = String.valueOf(n1 % 2) + bi;
+                                        n1 = n1 / 2;
+                                    }
+                                    //Guardando Resultado
+                                    resultados[i] = bi;
+                                } else {
+                                    //Convertendo numeros binarios em decimal
+                                    n1 = Integer.parseInt(n[i], 2);
+                                    //Guardando Resultado
+                                    resultados[i] = String.valueOf(n1);
                                 }
-                                //Mostrando Resultado
-                                JOptionPane.showMessageDialog(null, "--------"
-                                        + "------MUDANÇA-DE-BASE-------------\n"
-                                        + "Resultado: " + n2 + " em binario é " + bi);
-                            } else {
-                                //Convertendo numeros binarios em decimal
-                                n1 = Integer.parseInt(n, 2);
-                                String de = Integer.toBinaryString(n1);
-                                //Mostrando Resultado
-                                JOptionPane.showMessageDialog(null, "--------"
-                                        + "------MUDANÇA-DE-BASE-------------\n"
-                                        + "Resultado: " + de + " em decimal é " + n1);
                             }
+                            //criando uma view de apresentação dos resultados
+                            String view = "";
+                            for (int j = 0; j < qtd; j++) {
+                                view += n[j] + " ---> " + resultados[j] + "\n";
+                            }
+                            //apresentando resultados
+                            JOptionPane.showMessageDialog(null, "--------"
+                                    + "------MUDANÇA-DE-BASE-------------\n"
+                                    + view);
                             //opções para uma nova operação ou voltar ao menu principal
                             do {
                                 op = Integer.parseInt(JOptionPane.showInputDialog("--------"
@@ -299,11 +327,9 @@ public class Projeto1 {
                 JOptionPane.showMessageDialog(null, "Entrada Incompativel! "
                         + "\nVocê Saiu!");
             }
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Você saiu!");
-        }
-        catch(StringIndexOutOfBoundsException e){
+        } catch (StringIndexOutOfBoundsException | ArithmeticException | NegativeArraySizeException e) {
             JOptionPane.showMessageDialog(null, "Entrada Incompativel! "
                     + "\nVocê Saiu!");
         }
